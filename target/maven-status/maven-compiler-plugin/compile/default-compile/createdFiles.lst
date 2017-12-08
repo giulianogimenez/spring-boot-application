@@ -1,0 +1,6 @@
+br/com/vitaebrasil/inscricao/security/MD5CryptPasswordEncoder.class
+br/com/vitaebrasil/inscricao/models/Pessoa.class
+br/com/vitaebrasil/inscricao/Application.class
+br/com/vitaebrasil/inscricao/exceptions/ApiException.class
+br/com/vitaebrasil/inscricao/security/JWTAuthenticationFilter.class
+br/com/vitaebrasil/inscricao/api/RestApi.class
