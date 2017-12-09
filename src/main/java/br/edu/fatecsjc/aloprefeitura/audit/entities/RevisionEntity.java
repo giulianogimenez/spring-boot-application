@@ -13,7 +13,7 @@ import br.edu.fatecsjc.aloprefeitura.audit.listeners.RevisionEntityListener;
 import lombok.Data;
 
 @Entity
-@Table(catalog="inscricao_aud", name="REVINFO")
+@Table(catalog="aloprefeitura_aud", name="REVINFO")
 @org.hibernate.envers.RevisionEntity(RevisionEntityListener.class)
 @Data
 public class RevisionEntity {

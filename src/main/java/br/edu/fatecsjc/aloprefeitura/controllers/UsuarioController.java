@@ -36,10 +36,11 @@ public class UsuarioController {
 			return ResponseEntity.ok(usuario);
 		} else {
 			Usuario usuarioEditavel = usuarioRepository.findById(usuario.getId());
-			usuarioEditavel.setAdmin(usuario.getAdmin());
-			usuarioEditavel.setAtivo(usuario.getAtivo());
 			usuarioEditavel.setNome(usuario.getNome());
-			usuarioEditavel.setNomeReal(usuario.getNomeReal());
+			usuarioEditavel.setCpf(usuario.getCpf());
+			usuarioEditavel.setEmail(usuario.getEmail());
+			usuarioEditavel.setSetor(usuario.getSetor());
+			usuarioEditavel.setTipoUsuario(usuario.getTipoUsuario());
 			usuario = usuarioRepository.save(usuarioEditavel);
 			return ResponseEntity.ok(usuario);
 		}

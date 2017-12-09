@@ -1,10 +1,8 @@
 package br.edu.fatecsjc.aloprefeitura.models;
 
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,60 +11,59 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name="USR_USUARIO")
-@Data
 @Audited
-public class Usuario implements Serializable {
+@AuditTable(catalog="aloprefeitura_aud", value="USR_USUARIO_AUD")
+public @Data class Usuario {
 	@Id
+	@Column(name="USR_ID", nullable=false)
 	@GeneratedValue
-	@Column(name="USR_ID")
+	@Getter @Setter
 	private Long id;
 	
-	@NotNull(message="Nome de usuário necessária")
-	@Column(name="USR_NOME")
-	private String nome;
-
-	@NotNull(message="Nome real necessário")
-	@Column(name="USR_NOME_REAL")
-	private String nomeReal;
-
-
-	@NotNull(message="Senha não pode ser em branco")
-	@Column(name="USR_SENHA")
-	private String senha;
-
-	@NotNull(message="É administrador ou não?")
-	@Column(name="USR_ADMIN")
-	private Boolean admin;
-
-	@Column(name="USR_ATIVO")
-	private Boolean ativo;
-
-	@ManyToOne
-    @JoinColumn(name = "PSS_ID", referencedColumnName = "PSS_ID", nullable=true)
-	@Getter
-	private Pessoa pessoa;
+	@Getter @Setter
+	@Column(name="USR_EMAIL", nullable=false)
+	private String email;
 	
-	public void setSenha(String senha) {
+	@Getter @Setter
+	@Column(name="USR_NOME", nullable=false)
+	private String nome;
+	
+	@Getter
+	@Column(name="USR_PASS", nullable=false)
+	private String password;
+
+	@Column(name="USR_CPF")
+	@Getter @Setter
+	private String cpf;
+	
+	@ManyToOne
+	@JoinColumn(name="SET_ID", referencedColumnName = "SET_ID")
+	@Getter @Setter
+	private Setor setor;
+	
+	@Column(name="USR_TIPO", nullable=false)
+	@Getter @Setter
+	private TipoUsuario tipoUsuario;
+	
+	public void setPassword(String password) {
 		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
-			byte[] bytes = md.digest(senha.getBytes("UTF-8"));
+			MessageDigest md = MessageDigest.getInstance("SHA1");
+			byte[] bytes = md.digest(password.getBytes("UTF-8"));
 			StringBuilder sb = new StringBuilder();
 			for(int i=0; i< bytes.length ;i++){
 				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
 			}
-			this.senha = sb.toString();
+			this.password = sb.toString();
 		} 
 		catch (NoSuchAlgorithmException e){
 			e.printStackTrace();
@@ -76,5 +73,4 @@ public class Usuario implements Serializable {
 		}
 
 	}
-
 }

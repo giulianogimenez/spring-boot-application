@@ -23,7 +23,7 @@ public class MyUserPrincipal implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return usuario.getSenha();
+		return usuario.getPassword();
 	}
 
 	@Override
@@ -33,21 +33,21 @@ public class MyUserPrincipal implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return usuario.getAtivo();
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return usuario.getAtivo();
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return usuario.getAtivo();
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return usuario.getAtivo();
+		return true;
 	}
 }

@@ -11,7 +11,7 @@ public class MD5CryptPasswordEncoder implements PasswordEncoder {
 	@Override
 	public String encode(CharSequence rawPassword) {
 		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
+			MessageDigest md = MessageDigest.getInstance("SHA1");
 			byte[] bytes = md.digest(rawPassword.toString().getBytes("UTF-8"));
 			StringBuilder sb = new StringBuilder();
 			for(int i=0; i< bytes.length ;i++){
